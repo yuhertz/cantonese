@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cantonese Handbook</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .top-bar {
+            background-color: #007BFF;
+            color: white;
+            padding: 15px 20px;
+            text-align: center;
+            font-size: 18px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .phrase {
+            margin-bottom: 15px;
+        }
+        .phrase h3 {
+            margin: 0;
+        }
+        .pronunciation {
+            color: #007BFF;
+            margin-left: 10px;
+            font-size: 0.9em;
+            font-style: italic;
+        }
+        .translation {
+            color: #555;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        Categories: <a href="#" onclick="filterPhrases('basic')">Basic</a> | 
+        <a href="#" onclick="filterPhrases('phrases')">Phrases</a> | 
+        <a href="#" onclick="filterPhrases('dirty')">Dirty Word</a> 
+        
+    </div>
+
+    <div class="container">
+        <h1>Cantonese Handbook</h1>
+        <div id="phrases"></div>
+    </div>
+
+    <script>
+        const phrases = [
+            //basic
+
+            { category: 'basic', cantonese: '冇', pronunciation: 'mou5', translation: 'Dont have 没有' },
+            { category: 'basic', cantonese: '唔', pronunciation: 'm4', translation: 'No 不' },
+            { category: 'basic', cantonese: '系', pronunciation: 'hai6', translation: 'are/yes 是' },
+            { category: 'basic', cantonese: '你好', pronunciation: 'nei5 hou2', translation: 'Hello' },
+            { category: 'basic', cantonese: '早晨', pronunciation: 'zou2 san4', translation: 'Good Morning' },
+            { category: 'basic', cantonese: '早唞', pronunciation: 'zou2 tau2', translation: 'Good Night' },
+            { category: 'basic', cantonese: '多谢', pronunciation: 'do1 ze6', translation: 'Thank you' },
+            { category: 'basic', cantonese: '再見', pronunciation: 'zoi3 gin3', translation: 'Goodbye' },
+            { category: 'basic', cantonese: '点解', pronunciation: 'dim2 gaai2', translation: 'Why' },
+            { category: 'basic', cantonese: '早餐', pronunciation: 'zou2 caan1', translation: 'Breakfast' },
+            { category: 'basic', cantonese: '晚餐', pronunciation: 'maan5 caan1', translation: 'Dinner' },
+            { category: 'basic', cantonese: '飲水', pronunciation: 'jam2 seoi2', translation: 'Drink water' },
+            { category: 'basic', cantonese: '我唔知', pronunciation: 'ngo5 m4 zi1', translation: 'I dont know' },
+            { category: 'basic', cantonese: '对唔住', pronunciation: 'deoi3 m4 zyu6', translation: 'Sorry 对不起' },
+            { category: 'basic', cantonese: '我冇食', pronunciation: 'ngo5 mou5 sik6', translation: 'I never eat 我没吃' },
+            
+
+
+
+
+
+            //phrases
+
+            
+            { category: 'phrases', cantonese: '佢系边个', pronunciation: 'keoi5 hai6 bin1 go3', translation: 'He is who 他是谁' },
+            { category: 'phrases', cantonese: '我爱你', pronunciation: 'ngo5 oi3 nei5', translation: 'I love you' },
+            { category: 'phrases', cantonese: '你系边度', pronunciation: 'nei5 hai6 bin1 dou6', translation: 'Where are you' },
+            { category: 'phrases', cantonese: '你系呢度', pronunciation: 'ngo5 hai6 nei4 dou6', translation: 'I am here' },
+
+
+
+
+
+
+
+
+
+            //dirty word
+            { category: 'dirty', cantonese: '𨳒', pronunciation: 'diu2', translation: 'Fuck' },
+            { category: 'dirty', cantonese: '𨳒', pronunciation: 'gau1', translation: 'Penis' },
+            { category: 'dirty', cantonese: '閪', pronunciation: 'hai1', translation: 'Vagina' },
+            { category: 'dirty', cantonese: '仆街', pronunciation: 'puk1 gaai1', translation: 'Bastard' },
+            { category: 'dirty', cantonese: '陰莖', pronunciation: 'jam1 ging3', translation: 'Penis (formal)' },
+            { category: 'dirty', cantonese: '陰道', pronunciation: 'jam1 dou6', translation: 'Vagina （formal）' },
+            { category: 'dirty', cantonese: '胸部', pronunciation: 'hung1 bou6', translation: 'Breast' },
+            { category: 'dirty', cantonese: '精液', pronunciation: 'zing1 jik6', translation: 'Semen' },
+            { category: 'dirty', cantonese: '吹箫', pronunciation: 'ceoi1 siu1', translation: 'Blowjob' },
+            { category: 'dirty', cantonese: '三級片', pronunciation: 'saam1 kap1 pin3', translation: 'Porn' }
+        ];
+
+        function displayPhrases(filteredPhrases) {
+            const phrasesDiv = document.getElementById('phrases');
+            phrasesDiv.innerHTML = '';
+            filteredPhrases.forEach((phrase, index) => {
+                const phraseDiv = document.createElement('div');
+                phraseDiv.className = 'phrase';
+                phraseDiv.innerHTML = `
+                    <h3>${index + 1}. ${phrase.cantonese}<span class="pronunciation">(${phrase.pronunciation})</span></h3>
+                    <p class="translation">${phrase.translation}</p>
+                `;
+                phrasesDiv.appendChild(phraseDiv);
+            });
+        }
+
+        function filterPhrases(category) {
+            const filteredPhrases = phrases.filter(phrase => phrase.category === category);
+            displayPhrases(filteredPhrases);
+        }
+
+        // Display all phrases initially
+        displayPhrases(phrases);
+    </script>
+</body>
+</html>
